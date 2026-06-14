@@ -26,7 +26,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = "17"
     }
 
     defaultConfig {
@@ -39,7 +39,6 @@ android {
 
     signingConfigs {
         create("release") {
-            // If properties exist, use them, otherwise fallback to prevent build failure
             if (keystoreProperties.isNotEmpty()) {
                 keyAlias = keystoreProperties["keyAlias"] as String
                 keyPassword = keystoreProperties["keyPassword"] as String
@@ -51,7 +50,7 @@ android {
 
     buildTypes {
         getByName("release") {
-            // যদি keystoreProperties খালি হয়, তবে সাইনিং কনফিগারেশন সেট করবেন না
+            // যদি key.properties ফাইলটি থাকে, তবেই সাইন করবে
             if (keystoreProperties.isNotEmpty()) {
                 signingConfig = signingConfigs.getByName("release")
             }
@@ -64,6 +63,7 @@ android {
             )
         }
     }
+}
 
 flutter {
     source = "../.."
