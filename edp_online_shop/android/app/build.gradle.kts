@@ -50,8 +50,12 @@ android {
     }
 
     buildTypes {
-        release {
-            signingConfig = signingConfigs.getByName("release")
+        getByName("release") {
+            // যদি keystoreProperties খালি হয়, তবে সাইনিং কনফিগারেশন সেট করবেন না
+            if (keystoreProperties.isNotEmpty()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
+            
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
@@ -60,7 +64,6 @@ android {
             )
         }
     }
-}
 
 flutter {
     source = "../.."
