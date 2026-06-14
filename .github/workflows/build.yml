@@ -28,4 +28,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-release
-          path: edp_online_shop/build/app/outputs/flutter-apk/app-release-release.apk
+          path: |
+            edp_online_shop/build/app/outputs/flutter-apk/*.apk
+            edp_online_shop/build/app/outputs/apk/release/*.apk
