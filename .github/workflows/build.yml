@@ -1,5 +1,7 @@
 name: Flutter Build
+
 on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,14 +14,18 @@ jobs:
         with:
           flutter-version: '3.x'
           
-      - name: Build App
+      - name: Get Dependencies
         run: |
           cd edp_online_shop
           flutter pub get
-          flutter build appbundle
+          
+      - name: Build APK
+        run: |
+          cd edp_online_shop
+          flutter build apk --release --no-shrink
           
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-release
-          path: edp_online_shop/build/app/outputs/bundle/release/app-release.aab
+          path: edp_online_shop/build/app/outputs/flutter-apk/app-release-release.apk
